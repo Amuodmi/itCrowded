@@ -8,7 +8,7 @@ let sequelize;
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
-  sequelize = new Sequelize('just_tech_news_db', 'root', 'Supergeil!016', {
+  sequelize = new Sequelize('itCrowded_db', 'root', 'Supergeil!016', {
     host: 'localhost',
     dialect: 'mysql',
     port: 3306
