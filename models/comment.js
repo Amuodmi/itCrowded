@@ -1,8 +1,9 @@
-const { timeStamp } = require('console');
+
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../config/sequelizeConnection');
 
-const User = sequelizeConnection.define('user', {
+
+const Comment = sequelizeConnection.define('comment', {
 
     id: {
         type: Sequelize.INTEGER,
@@ -10,25 +11,33 @@ const User = sequelizeConnection.define('user', {
         autoIncrement: true,
         primaryKey: true        
     },
-        username: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            validate: {
-                len: [3, 26]
-            }
-        },
-        password:{
-            type: Sequelize.STRING,
-            allowNull: false, 
-            validate: {
-                len: [5,20]
-            }
+    content: {
+        type: Sequelize.TEXT,
+        allowNull: false, 
+    },
+    user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false, 
+        reference: {
+            model: 'Comment',
+            key: 'id'
         }
     },
+    post_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false, 
+        reference: {
+            model: 'Post',
+            key: 'id'
+        }
+},
     {
     sequelize: sequelizeConnection,
     timeStamps: false,
     freezeTableName: true,
-    modelName: 'users',
+    modelName: 'comments',
     underscored: true
 });
+
+
+module.exports = Comment; 

@@ -34,9 +34,10 @@ const User = sequelizeConnection.define('user', {
     underscored: true
 });
 
-//method that will catch any change made before or after a mod to the table
-//call back function, will be called wheneer we are creating or writing new eata for user modle and whatever objet we pass taht we are wrintng to the user model will be intercepted and passed to call back 
+//method that will catch any change made before or after to the table
 //this will trigger whenever user.create is run
 User.beforeCreate(async user => {
     user.password = await bcrypt.hash(user.password, 10)
 });
+
+module.exports = User;
