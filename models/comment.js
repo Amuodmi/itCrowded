@@ -30,6 +30,7 @@ const Comment = sequelizeConnection.define('comment', {
             model: 'Post',
             key: 'id'
         }
+    }
 },
     {
     sequelize: sequelizeConnection,
