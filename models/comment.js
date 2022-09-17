@@ -1,6 +1,7 @@
 
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../config/sequelizeConnection');
+const { Model, DataTypes } = require('sequelize');
 
 
 const Comment = sequelizeConnection.define('comment', {
@@ -30,7 +31,12 @@ const Comment = sequelizeConnection.define('comment', {
             model: 'Post',
             key: 'id'
         }
-    }
+    },
+    date_created: {
+        type: DataTypes.DATE, 
+        allowNull: false,
+        defaultValue: Sequelize.DataTypes.NOW
+    },
 },
     {
     sequelize: sequelizeConnection,
