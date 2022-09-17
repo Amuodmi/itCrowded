@@ -1,4 +1,4 @@
-const { timeStamp } = require('console');
+const { Model, DataTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../config/sequelizeConnection');
 const bcrypt = require('bcrypt');
@@ -38,6 +38,11 @@ const User = sequelizeConnection.define('user', {
 //this will trigger whenever user.create is run
 User.beforeCreate(async user => {
     user.password = await bcrypt.hash(user.password, 10)
+});
+
+User.beforeUpdate(async updatedUserData => {
+    updatedUserData.password = await bcrypt.hash(newUserData.password, 10)
+    return updatedUserData; 
 });
 
 module.exports = User;

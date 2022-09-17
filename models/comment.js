@@ -4,7 +4,10 @@ const sequelizeConnection = require('../config/sequelizeConnection');
 const { Model, DataTypes } = require('sequelize');
 
 
-const Comment = sequelizeConnection.define('comment', {
+class Comment extends Model {}
+
+Comment.init(
+    {
 
     id: {
         type: Sequelize.INTEGER,
