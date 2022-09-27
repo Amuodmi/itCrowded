@@ -1,0 +1,69 @@
+* {
+	font-family: Roboto;
+}
+
+.card-margins {
+	margin-left: 60px;
+	margin-right: 60px;
+	margin-top: 25px;
+	margin-bottom: 30px;
+}
+
+.header-text {
+	font-size: 25px;
+}
+
+.header-big {
+	font-size: 40px;
+	font-weight: bolder;
+	font-style: oblique;
+}
+
+.card-title {
+	font-weight: bolder;
+}
+
+.lists {
+	list-style: none;
+}
+
+.form-layout {
+	margin-left: 50px;
+	margin-top: 50px;
+	font-weight: bold;
+	color: aliceblue;
+}
+
+.form-p {
+	color: black;
+}
+
+.form-layout button {
+	margin-left: 125px;
+}
+
+.dashboard {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.edit-link {
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 75px;
+}
+
+.create-post {
+	margin-top: 20px;
+	margin-left: 50px;
+	font-style: oblique;
+}
+
+.create-post-button {
+	margin-left: 115px;
+	margin-top: 25px;
+}
+
+.add-comment-button {
+	margin-left: 45px;
+}
