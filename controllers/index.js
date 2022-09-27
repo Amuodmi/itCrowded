@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelizeConnection = require('../config/connection.js');
 
 const apiRoutes = require('./api');
 router.use('/api', apiRoutes);

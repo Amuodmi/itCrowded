@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment, Vote } = require('../../models');
-
+// const sequelizeConnection = require('../config/connection.js');
 
 //login page, where it will search for a user based on the given username and password
 // it will then create a new session for the user
