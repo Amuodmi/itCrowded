@@ -1,0 +1,29 @@
+
+{{#if posts.length}}
+<section>
+      <div class="d-flex justify-content-left">
+     <a href="/create-post" class="btn btn-primary create-post-button">Create Post</a>
+     </div>
+    <div class="col-lg-12">
+      <h2 class="col-lg-12 col-form-label dashboard text-center">Your Posts</h2> 
+    </div>
+  <ul>
+    {{#each posts as |post|}}
+    <li class="lists">
+      {{> edit_post-info post}}
+      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+{{else}}
+ <h2 class="col-lg-12 col-form-label dashboard text-center">You don't have any posts yet</h2>
+   <div class="col-lg-12 col-form-label dashboard text-center">
+      <div class="d-flex justify-content-left">
+     <a href="/create-post" class="btn btn-primary create-post-button">Create Post</a>
+     </div>
+{{/if}}
+
+
+<script src="/javascript/add-post.js"></script>
+<script src="/javascript/new-post.js"></script>
