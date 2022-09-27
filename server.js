@@ -31,15 +31,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
-//adds the session object to the request object, which will allow req.session to be defined
+//this will add the session object to the request object, which will allow req.session to be defined
 app.use(session(sess));
 
-// turn on routes
+// turns on routes
 app.use(routes);
 
 
 
-// turn on connection to db and server
+// turns on connection to db, and the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });

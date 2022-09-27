@@ -1,5 +1,5 @@
 * {
-	font-family: Roboto;
+	font-family: "Times New Roman", Times, serif;
 }
 
 .card-margins {
@@ -31,11 +31,11 @@
 	margin-left: 50px;
 	margin-top: 50px;
 	font-weight: bold;
-	color: aliceblue;
+	color: rgb(44, 241, 188);
 }
 
 .form-p {
-	color: black;
+	color: rgba(0, 0, 0, 0.623);
 }
 
 .form-layout button {
