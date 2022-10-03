@@ -1,19 +1,12 @@
-const router = require('express').Router();
-const sequelizeConnection = require('../config/connection.js');
+const router = require("express").Router();
 
-const apiRoutes = require('./api');
-router.use('/api', apiRoutes);
+const apiRoutes = require("./api/");
+const homeRoutes = require("./home-routes.js");
+const dashboardRoutes = require("./dashboard-routes.js");
+const commentRoutes = require("./api/comment-routes.js");
 
-
-const homeRoutes = require('./home-routes.js');
-router.use('/', homeRoutes);
-
-const dashboardRoutes = require('./dashboard-routes.js');
-router.use('/dashboard', dashboardRoutes);
-
-
-router.use((req, res) => {
-  res.status(404).end();
-});
+router.use("/dashboard", dashboardRoutes);
+router.use("/api", apiRoutes);
+router.use("/", homeRoutes);
 
 module.exports = router;
