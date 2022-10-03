@@ -1,53 +1,36 @@
+//This function will  take the value if the comment textarea and the post id from the windowlocation
+// then send a post request to add the comment with post_id and comment_text
 
-const Sequelize = require('sequelize');
-const sequelizeConnection = require('../config/connection.js');
-const { Model, DataTypes } = require('sequelize');
+async function commentFormHandler(event) {
+	event.preventDefault();
 
+	const comment_text = document
+		.querySelector('textarea[name="comment-body"]')
+		.value.trim();
+	const post_id = window.location.toString().split("/")[
+		window.location.toString().split("/").length - 1
+	];
 
-class Comment extends Model {}
+	if (comment_text) {
+		const response = await fetch("/api/comments", {
+			method: "POST",
+			body: JSON.stringify({
+				post_id,
+				comment_text,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 
-Comment.init(
-    {
+		if (response.ok) {
+			document.location.reload();
+		} else {
+			alert(response.statusText);
+		}
+	}
+}
 
-    id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true        
-    },
-    content: {
-        type: Sequelize.TEXT,
-        allowNull: false, 
-    },
-    user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false, 
-        reference: {
-            model: 'Comment',
-            key: 'id'
-        }
-    },
-    post_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false, 
-        reference: {
-            model: 'Post',
-            key: 'id'
-        }
-    },
-    date_created: {
-        type: DataTypes.DATE, 
-        allowNull: false,
-        defaultValue: Sequelize.DataTypes.NOW
-    },
-},
-    {
-    sequelize: sequelizeConnection,
-    timeStamps: false,
-    freezeTableName: true,
-    modelName: 'comments',
-    underscored: true
-});
-
-
-module.exports = Comment; 
+document
+	.querySelector(".comment-form")
+	.addEventListener("submit", commentFormHandler);

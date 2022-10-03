@@ -1,48 +1,85 @@
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-const { Model, DataTypes } = require('sequelize');
-const Sequelize = require('sequelize');
-const sequelizeConnection = require('../config/connection.js');
+// create the Post model
 
+class Post extends Model {
+	static comments(body, models) {
+		return models.Comment.create({
+			user_id: body.user_id,
+			post_id: body.post_id,
+		}).then(() => {
+			return Post.findOne({
+				where: {
+					id: body.post_id,
+				},
+				attributes: [
+					"id",
+					"title",
+					"body",
+					"created_at",
+					[
+						sequelize.literal(
+							"(SELECT COUNT(*) FROM vote WHERE post.id = comment.post_id)"
+						),
+					],
+				],
+				include: [
+					{
+						model: models.Comment,
+						attributes: [
+							"id",
+							"comment_text",
+							"post_id",
+							"user_id",
+							"created_at",
+						],
+						include: {
+							model: models.User,
+							attributes: ["username"],
+						},
+					},
+				],
+			});
+		});
+	}
+}
 
-class Post extends Model {}
+// create fields/columns for the Post model
+Post.init(
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		title: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		body: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+			validate: {
+				len: [1],
+			},
+		},
+		user_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "user",
+				key: "id",
+			},
+		},
+	},
+	{
+		sequelize,
+		freezeTableName: true,
+		underscored: true,
+		modelName: "post",
+	}
+);
 
-Post.init({
-
-    id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true        
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    content: {
-        type: Sequelize.TEXT,
-        allowNull: false, 
-    },
-    user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false, 
-        reference: {
-            model: 'User',
-            key: 'id'
-        }
-    },
-    date_created: {
-        type: DataTypes.DATE, 
-        allowNull: false,
-        defaultValue: Sequelize.DataTypes.NOW
-    },
-},
-    {
-    sequelize: sequelizeConnection,
-    timeStamps: false,
-    freezeTableName: true,
-    modelName: 'posts',
-    underscored: true
-});
-
-
-module.exports = Post; 
+module.exports = Post;
+//added comment
