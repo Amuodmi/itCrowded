@@ -2,8 +2,6 @@ const { Model, DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const sequelize = require("../config/connection");
 
-// create our model
-
 class User extends Model {
 	// set up the method to run on instance data (per user) to check password
 	checkPassword(loginPW) {
@@ -64,4 +62,3 @@ User.init(
 );
 
 module.exports = User;
-// adding comment

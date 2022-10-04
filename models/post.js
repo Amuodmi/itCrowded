@@ -82,4 +82,3 @@ Post.init(
 );
 
 module.exports = Post;
-//added comment
